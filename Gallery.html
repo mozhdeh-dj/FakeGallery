@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gallery Album</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+
+<h1 class="text-3xl font-bold text-center mb-8">📸 Gallery Album</h1>
+
+<div id="gallery" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+</div>
+
+
+<div id="editModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center">
+
+    <div class="bg-white w-96 p-6 rounded-xl">
+        <h2 class="text-xl font-bold mb-4">Edit Photo</h2>
+
+        <img alt="" id="modalImg"
+             class="mx-auto mb-4 rounded transition-all" src="">
+
+
+        <label for="widthRange" class="text-sm">Width</label>
+        <input type="range" min="100" max="300"
+               id="widthRange"
+               class="w-full mb-3">
+
+
+        <label for="heightRange" class="text-sm">Height</label>
+        <input type="range" min="100" max="300"
+               id="heightRange"
+               class="w-full mb-4">
+
+        <div class="flex gap-2">
+            <button onclick="saveEdit()"
+                    class="flex-1 bg-green-500 text-white py-1 rounded">
+                Save
+            </button>
+            <button onclick="closeModal()"
+                    class="flex-1 bg-gray-400 text-white py-1 rounded">
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<div id="deleteModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center">
+    <div class="bg-white w-96 p-6 rounded-xl">
+        <h2 class="text-xl font-bold mb-4 flex justify-center items-center">Delete Photo</h2>
+
+
+        <p class="mb-5 text-lg font-bold">Do you want to delete?</p>
+
+        <div class="flex gap-2">
+            <button onclick="confirmDelete()"
+                    class="flex-1 bg-red-500 text-white py-1 rounded">
+                Delete
+            </button>
+            <button onclick="closeDeleteModal()"
+                    class="flex-1 bg-gray-400 text-white py-1 rounded">
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
