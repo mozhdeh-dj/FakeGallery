@@ -4,9 +4,11 @@ const modalImg = document.getElementById("modalImg")
 const widthRange = document.getElementById("widthRange")
 const heightRange = document.getElementById("heightRange")
 const deleteModal = document.getElementById("deleteModal")
-
+const actionModal = document.getElementById('actionModal')
+const actionImg = document.getElementById('actionImg')
 let photos = []
 let selectedPhoto = null
+
 
 
 fetch("https://fakestoreapi.com/products")
@@ -20,42 +22,34 @@ fetch("https://fakestoreapi.com/products")
 function renderPhotos() {
     gallery.innerHTML = ""
 
-    photos.forEach(photo => {
+    photos.map(photo => {
         gallery.innerHTML += `
-        <div class="bg-white p-4 rounded-xl shadow-md text-center">
-            <img src="${photo.image}"
-            width="150px" height="150px"
-             style="width:${photo.width}px height:${photo.height}px"
-             class="mx-auto mb-3 object-cover rounded">
-
-        <div class="flex gap-2 justify-center">
-            <button onclick="openEdit(${photo.id})"
-                  class="bg-blue-500 text-white px-3 py-1 rounded">
-                Edit
-            </button>
-
-            <button onclick="openDelete(${photo.id})"
-                  class="bg-red-500 text-white px-3 py-1 rounded">
-                Delete
-            </button>
+        <div class="bg-white p-4 rounded-xl shadow-md text-center cursor-pointer">
+             <a href="#" onclick="openAction(${photo.id})">
+                 <img src="${photo.image}"
+                    style="width:${photo.width || 150}px; height:${photo.height || 150}px;"
+                    class="mx-auto mb-3 object-cover rounded">
+            </a>
         </div>
-      </div>
     `
     })
 }
 
 function openEdit(id) {
+    closeActionModal()
+
     selectedPhoto = photos.find(photo => photo.id === id)
 
     modalImg.src = selectedPhoto.image
-    modalImg.style.width = selectedPhoto.width + "px"
-    modalImg.style.height = selectedPhoto.height + "px"
+    modalImg.style.width = widthRange.value  + "px"
+    modalImg.style.height = heightRange.value + "px"
 
-    widthRange.value = selectedPhoto.width
-    heightRange.value = selectedPhoto.height
+    widthRange.value = selectedPhoto.width || 150
+    heightRange.value = selectedPhoto.height || 150
 
     modal.classList.remove("hidden")
     modal.classList.add("flex")
+
 }
 
 widthRange.addEventListener("input", () => {
@@ -85,6 +79,7 @@ let deleteItem = null
 
 
 function openDelete(id) {
+    closeActionModal()
     deleteItem = photos.find(p => p.id === id)
 
     deleteModal.classList.remove("hidden")
@@ -103,5 +98,17 @@ function confirmDelete() {
 function closeDeleteModal(){
     deleteModal.classList.add("hidden")
     deleteModal.classList.remove("flex")
+}
+
+function openAction(id){
+    selectedPhoto = photos.find(photo => photo.id === id)
+    actionImg.src = selectedPhoto.image
+    actionModal.classList.remove('hidden')
+    actionModal.classList.add('flex')
+}
+
+function closeActionModal(){
+    actionModal.classList.remove('flex')
+    actionModal.classList.add('hidden')
 }
 

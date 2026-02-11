@@ -19,9 +19,10 @@
     <div class="bg-white w-96 p-6 rounded-xl">
         <h2 class="text-xl font-bold mb-4">Edit Photo</h2>
 
-        <img alt="" id="modalImg"
-             class="mx-auto mb-4 rounded transition-all" src="">
-
+        <div class="w-64 h-64 mx-auto mb-4 overflow-hidden flex items-center justify-center border rounded">
+            <img alt="" id="modalImg"
+                 class="object-contain rounded transition-all" src="">
+        </div>
 
         <label for="widthRange" class="text-sm">Width</label>
         <input type="range" min="100" max="300"
@@ -67,6 +68,29 @@
         </div>
     </div>
 </div>
+
+<div id="actionModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center">
+    <div class="bg-white w-80 p-6 rounded-xl text-center">
+        <img id="actionImg" class="mx-auto mb-4 rounded w-40 h-40 object-cover">
+
+        <div class="flex gap-3">
+            <button onclick="openEdit(selectedPhoto.id)"
+                    class="flex-1 bg-blue-500 text-white py-2 rounded">
+                Edit
+            </button>
+            <button onclick="openDelete(selectedPhoto.id)"
+                    class="flex-1 bg-red-500 text-white py-2 rounded">
+                Delete
+            </button>
+        </div>
+
+        <button onclick="closeActionModal()"
+                class="mt-4 text-sm text-gray-500">
+            Cancel
+        </button>
+    </div>
+</div>
+
 <script src="script.js"></script>
 </body>
 </html>
